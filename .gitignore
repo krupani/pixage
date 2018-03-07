@@ -1,0 +1,9 @@
+old/*
+data/*.png
+data/*.html
+*.gem
+*.sh
+*.png
+pixie_tmp/*
+pixie_reports/*
+
