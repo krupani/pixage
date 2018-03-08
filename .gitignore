@@ -1,6 +1,4 @@
-old/*
-data/*.png
-data/*.html
+test_data/*
 *.gem
 *.sh
 *.png

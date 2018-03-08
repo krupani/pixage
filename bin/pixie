@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+require "pixie/diagnosis"
+require "pixie/cli"
+include Pixie
+
+def show_help
+  puts <<HELP
+
+    Commands      :
+
+      help        
+      ----
+      Description : Prints help information
+      Usage       : pixie help
+
+
+      diagnosis
+      ---------
+      Description : Performs a check to see all dependecies match for smooth execution of pixie gem commands
+      Usage       : pixie diagnosis 
+
+
+      compare
+      -------
+      Description : Compares 2 images and generates diff
+      Usage       : pixie compare <expected_image_path> <actual_image_path> <options>
+      Options     : 1. --threshold (optional) : maximum distortion allowed while matching (default = 1)
+                    2. --fuzz (optional)      : fuzz distance between colours (default = 20)
+                    3. --color (optional)     : highlight pixel difference with this color (default = blue)
+
+      version
+      -------
+      Description : Shows the version of pixie gem
+      Usage       : pixie version | pixie --version | pixie -v
+
+HELP
+end
+
+
+if ARGV.length == 0
+    show_help
+else
+  cmd = ARGV.shift
+  case cmd
+  
+  when 'version', '--version', '-v'
+    puts File.read(File.expand_path("../../lib/pixie/version", __FILE__))
+  
+  when 'diagnosis'
+    Pixie::Diagnosis.new().perform_diagnosis
+
+  when 'compare'
+    if ARGV.size<2
+      show_help 
+    elsif ARGV.size==2
+      compare_images(ARGV.shift, ARGV.shift)
+    else
+      compare_images(ARGV.shift, ARGV.shift, ARGV)
+    end
+  
+  else
+    show_help
+  end
+
+end
+
+
+
+
+
+
