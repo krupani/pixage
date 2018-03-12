@@ -10,7 +10,7 @@ module Pixie
   		Compare.new.compare_images(images,options)
 	end
 
-	def resize_n_compare(expected, actual, args=[])
+	def resize_n_compare(expected, actual, args={})
 		images = manage_paths(expected,actual)
 		options = manage_options(args)
 		create_pixie_report_dir
