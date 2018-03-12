@@ -4,4 +4,5 @@ test_data/*
 *.png
 pixie_tmp/*
 pixie_reports/*
+!images/*
 
