@@ -16,17 +16,19 @@ module Pixie
 		images
 	end
 
-	def manage_options(args=[])
+	def manage_options(args={})
 		options = YAML.load_file(File.absolute_path("defaults.yml", "data"))
-		args.each do |arg|
-			if arg.downcase.include?("--fuzz")
-				options[:fuzz] = arg.downcase.split("=").last
-			elsif arg.downcase.include?("--threshold")
-				options[:threshold] = arg.downcase.split("=").last
-			elsif arg.downcase.include?("--color")
-				options[:color] = arg.downcase.split("=").last
+		args.each do |key,val|
+			if key.downcase == :fuzz
+				options[:fuzz] = val.downcase
+			elsif key.downcase == :threshold
+				options[:threshold] = val.downcase
+			elsif key.downcase == :color
+				options[:color] = val.downcase
+			elsif key.downcase == :resize
+				options[:resize] = val.downcase
 			else
-				console_log("Unrecognised option `#{arg}`, defaults will be applied.")
+				console_log("Unrecognised option `--#{key}=#{val}`, defaults will be applied.", :warning)
 			end
 		end 
 		return options
