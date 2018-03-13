@@ -1,8 +1,5 @@
 test_data/*
 *.gem
 *.sh
-*.png
 pixie_tmp/*
 pixie_reports/*
-!images/*
-
