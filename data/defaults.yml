@@ -2,3 +2,4 @@
 :threshold: 1
 :color: "blue"
 :resize: "desc"
+:force: false

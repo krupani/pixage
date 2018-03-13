@@ -27,7 +27,7 @@ module Pixie
 			execution_dir = Time.now.strftime("%d-%b-%y-%H-%M-%S")
 			create_compare_execution_dir(execution_dir)
 			images = make_copies(images, "pixie_report/#{execution_dir}")
-			convert.resize_images(images,options[:resize])
+			convert.resize_images(images,options)
 			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixie_report/#{execution_dir}/diff.png"
 			execute_command(cmd)
 			Pathname.new("pixie_report/#{execution_dir}/diff.png").realpath.to_s

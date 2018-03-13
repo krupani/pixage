@@ -20,17 +20,19 @@ module Pixie
 		options = YAML.load_file(File.join(File.dirname(__FILE__) + "/../../data/defaults.yml"))
 		args.each do |key,val|
 			if key.downcase == :fuzz
-				options[:fuzz] = val.downcase
+				options[:fuzz] = val.downcase.to_i
 			elsif key.downcase == :threshold
-				options[:threshold] = val.downcase
+				options[:threshold] = val.downcase.to_i
 			elsif key.downcase == :color
-				options[:color] = val.downcase
+				options[:color] = val.downcase.to_s
 			elsif key.downcase == :resize
-				options[:resize] = val.downcase
+				options[:resize] = val.downcase.to_s
+			elsif key.downcase == :force
+				options[:force] = val.downcase.to_s
 			else
 				console_log("Unrecognised option `--#{key}=#{val}`, defaults will be applied.", :warning)
 			end
-		end 
+		end
 		return options
 	end
 

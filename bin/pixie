@@ -40,6 +40,7 @@ def show_help
                       3. --color (optional)     : highlight pixel difference with this color (default = blue)
                       4. --resize (optional)    : a. desc (default) : for resizing larger image to smaller one
                                                   b. asc : for resizing smaller image to larger one (image can pixelate)
+                      5. --force (options)      : force=true will ignore aspect ratio while resizing (default=false)
 
 
       version
@@ -53,7 +54,7 @@ end
 def arg_to_hash(args)
   arg_hash = {}
   args.each do |arg|
-    arg_arr = arg.delete("--").split("=")
+    arg_arr = arg.gsub("-","").split("=")
     arg_hash[arg_arr.first.downcase.to_sym] = arg_arr.last.downcase
   end
   arg_hash
