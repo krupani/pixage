@@ -17,7 +17,7 @@ module Pixie
 	end
 
 	def manage_options(args={})
-		options = YAML.load_file(File.absolute_path("defaults.yml", "data"))
+		options = YAML.load_file(File.join(File.dirname(__FILE__) + "/../../data/defaults.yml"))
 		args.each do |key,val|
 			if key.downcase == :fuzz
 				options[:fuzz] = val.downcase

@@ -1,7 +1,7 @@
 require 'mini_magick'
 require 'fileutils'
 require 'pathname'
-require_relative 'size'
+require_relative 'convert'
 require_relative '../params'
 require_relative '../logger'
 
@@ -10,7 +10,8 @@ module Pixie
 	class Compare
 
 		def compare_images(images,options)
-			if check_sizes(images)
+			convert = Convert.new()
+			if convert.check_sizes(images)
 				console_log("Warning: Image sizes are not equal, the generated diff might be misleading, please use : ", :warning)
 				console_log("pixie resize_n_compare\n", :pass)
 			end
@@ -18,15 +19,18 @@ module Pixie
 			create_compare_execution_dir(execution_dir)
 			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixie_report/#{execution_dir}/diff.png"
 			execute_command(cmd)
+			Pathname.new("pixie_report/#{execution_dir}/diff.png").realpath.to_s
 		end
 
 		def resize_n_compare_images(images,options)
+			convert = Convert.new()
 			execution_dir = Time.now.strftime("%d-%b-%y-%H-%M-%S")
 			create_compare_execution_dir(execution_dir)
 			images = make_copies(images, "pixie_report/#{execution_dir}")
-			resize_images(images,options[:resize])
+			convert.resize_images(images,options[:resize])
 			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixie_report/#{execution_dir}/diff.png"
 			execute_command(cmd)
+			Pathname.new("pixie_report/#{execution_dir}/diff.png").realpath.to_s
 		end
 
 		def execute_command(cmd)
