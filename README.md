@@ -48,7 +48,7 @@ There are 2 ways this gem can be used.
 ### <a name="cli"></a> 1. CLI Usage
 Following are the list of commands :  
     
-![help, diagnosis, compare, resize_n_compare, version](https://github.com/krupani/pixie/blob/0.1/images/pixie_commands.png)    
+![help, diagnosis, compare, resize_n_compare, version](https://github.com/krupani/pixie/blob/master/images/pixie_commands.png)    
 
 Basic usage in case of compare 2 images which are similar size and resolution:   
 ```   
