@@ -6,7 +6,8 @@ An image comparison utility which can be used manually or be integrated with an 
 ## Table of contents
 - [Installation](#installation)  
     - [Install using gem command](#gem)    
-    - [Install using bundler](#bundler)  
+    - [Install using bundler](#bundler)
+- [Dependency](#dependency)
 - [Usage](#usage)
     - [CLI Usage](#cli)
     - [Automation Usage](#automation)
@@ -30,8 +31,15 @@ gem 'pixie'
 then run following   
 ```   
 bundle install   
+```  
+
+## Dependency   
+This gem is dependent on ImageMagick. Please install latest verison of ImageMagick before you start using pixie.   
+To verify if imagemagick is successfully installed, please run the following command (After installaing pixie).   
 ```   
-  
+pixie diagnosis 
+```    
+   
 ## Usage   
 There are 2 ways this gem can be used. 
 1. CLI usage which can be really helpful for testers and designers to do visual regression testing manually.
@@ -55,3 +63,27 @@ pixie compare images/expected.png images/actual.png --threshold=1 --fuzz=25 --co
 For further commmand usage [documentation](https://github.com/krupani/pixie/wiki), please refer the [wiki](https://github.com/krupani/pixie/wiki) section.    
 
 ### <a name="automation"></a> 2. Automation Usage    
+Apart from CLI usage, pixie gem can also be integrated with automation suite be it a selenium-webdriver-ruby for web application or appium-ruby for mobile applications or just a ruby script acheieving some fine purpose.     
+Below is the code snippet to be used in case of automation integration:
+
+```
+# First, as mentioned in installation step, include gem in Gemfile
+gem 'pixie'        
+    
+# Next, require and include it in your project
+require 'pixie'    
+include 'Pixie'     
+
+# Finally use the commands in your code:    
+# Assuming you have your baseline/expected image previously stored
+@driver.save_screenshot(actual.png)
+resize_n_compare(expected.png, actual.png)
+
+# Also you can compare 2 runtime images like:
+@driver.save_screenshot(first.png)
+@driver.save_screenshot(second.png)
+compare(first.png, second.png)
+
+```
+
+_NOTE: To see a working example on how to integrate pixie with a Ruby-Cucumber-Selenium tests, please see the examples directory. It also has a sample report stored for reference._
