@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+require "pixie/diagnosis"
+require "pixie/cli"
+include Pixie
+
+def show_help
+  puts <<HELP
+
+    Commands        :
+
+      help        
+      ----
+      Description   : Prints help information
+      Usage         : pixie help
+
+
+      diagnosis
+      ---------
+      Description   : Performs a check to see all dependecies match for smooth execution of pixie gem commands
+      Usage         : pixie diagnosis 
+
+
+      compare
+      -------
+      Description   : Compares 2 images and generates diff (compares original images and just generates a diff image)
+      Usage         : pixie compare <expected_image_path> <actual_image_path> <--option=value>
+      Options       : 1. --threshold (optional) : maximum distortion allowed while matching (default = 1)
+                      2. --fuzz (optional)      : fuzz distance between colours (default = 20)
+                      3. --color (optional)     : highlight pixel difference with this color (default = blue)
+
+
+      resize_n_compare 
+      ----------------
+      Description   : Resizes the images and then compares (makes a copy of original images before resizing)
+                      (By default the larger images is resized to the smaller image to avoid pixelating.)
+      Usage         : pixie resize_n_compare <expected_image_path> <actual_image_path> <--option=value>
+      options       : 1. --threshold (optional) : maximum distortion allowed while matching (default = 1)
+                      2. --fuzz (optional)      : fuzz distance between colours (default = 20)
+                      3. --color (optional)     : highlight pixel difference with this color (default = blue)
+                      4. --resize (optional)    : a. desc (default) : for resizing larger image to smaller one
+                                                  b. asc : for resizing smaller image to larger one (image can pixelate)
+                      5. --force (options)      : force=true will ignore aspect ratio while resizing (default=false)
+
+
+      version
+      -------
+      Description : Shows the version of pixie gem
+      Usage       : pixie version | pixie --version | pixie -v
+
+HELP
+end
+
+def arg_to_hash(args)
+  arg_hash = {}
+  args.each do |arg|
+    arg_arr = arg.gsub("-","").split("=")
+    arg_hash[arg_arr.first.downcase.to_sym] = arg_arr.last.downcase
+  end
+  arg_hash
+end
+
+
+if ARGV.length == 0
+    show_help
+else
+  cmd = ARGV.shift
+  case cmd
+  
+  when 'version', '--version', '-v'
+    puts File.read(File.expand_path("../../lib/pixie/version", __FILE__))
+  
+  when 'diagnosis'
+    Pixie::Diagnosis.new().perform_diagnosis
+
+  when 'compare'
+    if ARGV.size<2
+      show_help 
+    elsif ARGV.size==2
+      compare(ARGV.shift, ARGV.shift)
+    else
+      compare(ARGV.shift, ARGV.shift, arg_to_hash(ARGV))
+    end
+  
+  when 'resize_n_compare'
+    if ARGV.size<2
+      show_help
+    elsif ARGV.size==2
+      resize_n_compare(ARGV.shift, ARGV.shift)
+    else
+      resize_n_compare(ARGV.shift, ARGV.shift, arg_to_hash(ARGV))
+    end
+
+  else
+    show_help
+  end
+
+end
+
+
+
+
+
+

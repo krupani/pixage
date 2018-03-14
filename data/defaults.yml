@@ -1,0 +1,5 @@
+:fuzz: 20
+:threshold: 1
+:color: "blue"
+:resize: "desc"
+:force: false

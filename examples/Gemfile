@@ -1,0 +1,6 @@
+source "http://rubygems.org"
+gem 'selenium-webdriver'
+gem 'cucumber'
+gem 'rspec'
+gem 'testnow'
+gem 'pixie'
