@@ -11,6 +11,8 @@ An image comparison utility which can be used manually or be integrated with an 
 - [Usage](#usage)
     - [CLI Usage](#cli)
     - [Automation Usage](#automation)
+- [Contributing](#contributing)   
+- [Issues](#issues)     
     
 
 ## Installation  
@@ -87,3 +89,9 @@ compare(first.png, second.png)
 ```
 
 _NOTE: To see a working example on how to integrate pixie with a Ruby-Cucumber-Selenium tests, please see the examples directory. It also has a sample report stored for reference._
+
+## Contributing   
+Ideas and suggestions are always always most welcome. Please fork this gem and feel free to add any updates, suggestions etc and create a pull request.  
+
+## Issues
+If you face any problem related to syntax, usability, documentation then please raise an [issue](https://github.com/krupani/pixie/issues)    
