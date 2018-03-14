@@ -12,5 +12,5 @@ Scenario: Compare the difference in google UAE and google India pages
 # Runtime screenshot comarison with a baseline image previously saved
 Scenario: Compare the difference in google page on two different days
 	Given I am on google "uae" page
-	And I capture a screenshot named "baseline"
+	And I capture a screenshot named "uae"
 	Then I compare "uae" with "baseline" screenshots to generate diff
