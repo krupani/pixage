@@ -1,4 +1,4 @@
-Feature: As a pixie user, I want to see an example of how to use pixie for automation cases
+Feature: As a pixage user, I want to see an example of how to use pixage for automation cases
 
 # Runtime screenshot comparison
 Scenario: Compare the difference in google UAE and google India pages

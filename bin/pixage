@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require "pixie/diagnosis"
-require "pixie/cli"
-include Pixie
+require "pixage/diagnosis"
+require "pixage/cli"
+include Pixage
 
 def show_help
   puts <<HELP
@@ -12,19 +12,19 @@ def show_help
       help        
       ----
       Description   : Prints help information
-      Usage         : pixie help
+      Usage         : pixage help
 
 
       diagnosis
       ---------
-      Description   : Performs a check to see all dependecies match for smooth execution of pixie gem commands
-      Usage         : pixie diagnosis 
+      Description   : Performs a check to see all dependecies match for smooth execution of pixage gem commands
+      Usage         : pixage diagnosis 
 
 
       compare
       -------
       Description   : Compares 2 images and generates diff (compares original images and just generates a diff image)
-      Usage         : pixie compare <expected_image_path> <actual_image_path> <--option=value>
+      Usage         : pixage compare <expected_image_path> <actual_image_path> <--option=value>
       Options       : 1. --threshold (optional) : maximum distortion allowed while matching (default = 1)
                       2. --fuzz (optional)      : fuzz distance between colours (default = 20)
                       3. --color (optional)     : highlight pixel difference with this color (default = blue)
@@ -34,7 +34,7 @@ def show_help
       ----------------
       Description   : Resizes the images and then compares (makes a copy of original images before resizing)
                       (By default the larger images is resized to the smaller image to avoid pixelating.)
-      Usage         : pixie resize_n_compare <expected_image_path> <actual_image_path> <--option=value>
+      Usage         : pixage resize_n_compare <expected_image_path> <actual_image_path> <--option=value>
       options       : 1. --threshold (optional) : maximum distortion allowed while matching (default = 1)
                       2. --fuzz (optional)      : fuzz distance between colours (default = 20)
                       3. --color (optional)     : highlight pixel difference with this color (default = blue)
@@ -45,8 +45,8 @@ def show_help
 
       version
       -------
-      Description : Shows the version of pixie gem
-      Usage       : pixie version | pixie --version | pixie -v
+      Description : Shows the version of pixage gem
+      Usage       : pixage version | pixage --version | pixage -v
 
 HELP
 end
@@ -68,10 +68,10 @@ else
   case cmd
   
   when 'version', '--version', '-v'
-    puts File.read(File.expand_path("../../lib/pixie/version", __FILE__))
+    puts File.read(File.expand_path("../../lib/pixage/version", __FILE__))
   
   when 'diagnosis'
-    Pixie::Diagnosis.new().perform_diagnosis
+    Pixage::Diagnosis.new().perform_diagnosis
 
   when 'compare'
     if ARGV.size<2

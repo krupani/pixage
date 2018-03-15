@@ -1,5 +1,4 @@
 test_data/*
 *.gem
 *.sh
-pixie_tmp/*
-pixie_reports/*
+pixage_reports/*

@@ -1,7 +1,7 @@
 require 'pathname'
 require 'yaml'
 
-module Pixie
+module Pixage
 
 	def manage_paths(expected,actual)
 		images = {}
@@ -36,13 +36,13 @@ module Pixie
 		return options
 	end
 
-	def create_pixie_report_dir
-		Dir.mkdir("pixie_report") unless Dir.exists?("pixie_report")
+	def create_pixage_report_dir
+		Dir.mkdir("pixage_report") unless Dir.exists?("pixage_report")
 	end
 
 	def create_compare_execution_dir(dir_name)
-		create_pixie_report_dir
-		Dir.mkdir("pixie_report/#{dir_name}")
+		create_pixage_report_dir
+		Dir.mkdir("pixage_report/#{dir_name}")
 	end
 
 end
