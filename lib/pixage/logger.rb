@@ -1,6 +1,6 @@
 require 'colorize'
 
-module Pixie
+module Pixage
 
 	def console_log(text, status, loud=false)
 		text=text.upcase if loud

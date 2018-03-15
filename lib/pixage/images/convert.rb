@@ -1,7 +1,7 @@
 require 'mini_magick'
 require_relative '../logger'
 
-module Pixie
+module Pixage
 
 	class Convert
 

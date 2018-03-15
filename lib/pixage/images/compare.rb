@@ -5,7 +5,7 @@ require_relative 'convert'
 require_relative '../params'
 require_relative '../logger'
 
-module Pixie
+module Pixage
 
 	class Compare
 
@@ -13,24 +13,24 @@ module Pixie
 			convert = Convert.new()
 			if convert.check_sizes(images)
 				console_log("Warning: Image sizes are not equal, the generated diff might be misleading, please use : ", :warning)
-				console_log("pixie resize_n_compare\n", :pass)
+				console_log("pixage resize_n_compare\n", :pass)
 			end
 			execution_dir = Time.now.strftime("%d-%b-%y-%H-%M-%S")
 			create_compare_execution_dir(execution_dir)
-			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixie_report/#{execution_dir}/diff.png"
+			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixage_report/#{execution_dir}/diff.png"
 			execute_command(cmd)
-			Pathname.new("pixie_report/#{execution_dir}/diff.png").realpath.to_s
+			Pathname.new("pixage_report/#{execution_dir}/diff.png").realpath.to_s
 		end
 
 		def resize_n_compare_images(images,options)
 			convert = Convert.new()
 			execution_dir = Time.now.strftime("%d-%b-%y-%H-%M-%S")
 			create_compare_execution_dir(execution_dir)
-			images = make_copies(images, "pixie_report/#{execution_dir}")
+			images = make_copies(images, "pixage_report/#{execution_dir}")
 			convert.resize_images(images,options)
-			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixie_report/#{execution_dir}/diff.png"
+			cmd = "compare -dissimilarity-threshold #{options[:threshold]} -fuzz #{options[:fuzz]} -metric AE -highlight-color #{options[:color]} #{images[:expected]} #{images[:actual]} pixage_report/#{execution_dir}/diff.png"
 			execute_command(cmd)
-			Pathname.new("pixie_report/#{execution_dir}/diff.png").realpath.to_s
+			Pathname.new("pixage_report/#{execution_dir}/diff.png").realpath.to_s
 		end
 
 		def execute_command(cmd)
