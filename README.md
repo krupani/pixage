@@ -91,7 +91,14 @@ compare(first.png, second.png)
 
 ```
 
-_NOTE: To see a working example on how to integrate pixage with a Ruby-Cucumber-Selenium tests, please see the examples directory. It also has a sample report stored for reference._
+_NOTE: To see a working example on how to integrate pixage with a Ruby-Cucumber-Selenium tests, please see the examples directory. It also has a sample report stored for reference._    
+    
+To execute the example, do the following:
+- Clone the repo `git clone https://github.com/krupani/pixage.git`   
+- get into the examples folder `cd pixage/examples`    
+- install dependent gems or just run `bundle install`
+    - if you dont have bundler installed then first run `gem install bundler` and then repeat above step   
+- execute the tests `cucumber features BROWSER=chrome` , provided you have chromedriver in your PATH    
 
 ## Contributing   
 Ideas and suggestions are always always most welcome. Please fork this gem and feel free to add any updates, suggestions etc and create a pull request.  
